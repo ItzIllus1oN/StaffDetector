@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "staffradar",
+  "version": "1.0.0",
+  "name": "StaffRadar",
+  "description": "Detects hidden staff and spectators.",
+  "authors": [
+    "Senior Mod Developer"
+  ],
+  "contact": {
+    "homepage": "https://github.com/example/staffradar"
+  },
+  "license": "MIT",
+  "icon": "assets/staffradar/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.example.staffradar.StaffRadarMod"
+    ]
+  },
+  "mixins": [
+    "staffradar.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.10",
+    "minecraft": ">=1.21.8",
+    "fabric-api": "*"
+  }
+}

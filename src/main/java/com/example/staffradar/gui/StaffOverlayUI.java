@@ -1,0 +1,60 @@
+package com.example.staffradar.gui;
+
+import com.example.staffradar.detection.StaffPlayer;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
+import java.util.Collection;
+import java.util.List;
+import java.util.ArrayList;
+
+public class StaffOverlayUI {
+    private static boolean visible = true;
+    private static List<StaffPlayer> cachedStaff = new ArrayList<>();
+
+    public static void toggle() {
+        visible = !visible;
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.player != null) {
+            client.player.sendMessage(net.minecraft.text.Text.literal("§7[StaffRadar] HUD Visibility: " + (visible ? "§aON" : "§cOFF")), true);
+        }
+    }
+
+    public static void updateList(Collection<StaffPlayer> staff) {
+        cachedStaff = new ArrayList<>(staff);
+    }
+
+    public static void renderHUD(DrawContext context, float delta) {
+        if (!visible) return;
+        
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.options.hudHidden || client.player == null) return;
+
+        if (cachedStaff.isEmpty()) return;
+
+        int x = 5;
+        int y = 5;
+        int maxWidth = 120;
+        for (StaffPlayer player : cachedStaff) {
+            String text = player.name() + " (" + player.reason() + ")";
+            maxWidth = Math.max(maxWidth, client.textRenderer.getWidth(text) + 10);
+        }
+        int width = maxWidth;
+        int height = 15 + (cachedStaff.size() * 10);
+
+        // Draw background (Semi-transparent Black)
+        context.fill(x, y, x + width, y + height, 0xCC000000);
+        // Accent line (Opaque Yellow)
+        context.fill(x, y, x + width, y + 1, 0xFFFFFF55); 
+        
+        // Draw title (Opaque Yellow)
+        context.drawTextWithShadow(client.textRenderer, "§e§lStaff Detected (" + cachedStaff.size() + "):", x + 5, y + 5, 0xFFFFFF55);
+        
+        int offset = 15;
+        for (StaffPlayer player : cachedStaff) {
+            // Player text (Opaque White)
+            String entry = "§f" + player.name() + " §7(" + player.reason() + ")";
+            context.drawTextWithShadow(client.textRenderer, entry, x + 5, y + offset, 0xFFFFFFFF);
+            offset += 10;
+        }
+    }
+}

@@ -1,0 +1,360 @@
+﻿
+> Configure project :
+Fabric Loom: 1.10.5
+
+> Task :compileJava FAILED
+.\gradlew : C:\dev\Staf
+fRadar\src\main\java\co
+m\example\staffradar\gu
+i\callbacks\UICallbacks
+.java:4: error: 
+package improperui.api.
+callback does not exist
+At line:1 char:1
++ .\gradlew 
+compileJava --console 
+plain 2>&1 | Out-File 
+-FilePath java_ ...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (C:\dev\StaffR   
+ ad... does not exi    
+st:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+import improperui.api.c
+allback.UICallback;
+                       
+       ^
+C:\dev\StaffRadar\src\m
+ain\java\com\example\st
+affradar\gui\ConfigScre
+enUI.java:4: error: 
+package improperui.api 
+does not exist
+import improperui.api.I
+mproperUIAPI;
+                     ^
+C:\dev\StaffRadar\src\m
+ain\java\com\example\st
+affradar\gui\ConfigScre
+enUI.java:5: error: 
+package 
+improperui.api.panel 
+does not exist
+import improperui.api.p
+anel.ImproperUIPanel;
+                       
+    ^
+C:\dev\StaffRadar\src\m
+ain\java\com\example\st
+affradar\gui\ConfigScre
+enUI.java:8: error: 
+cannot find symbol
+    private static 
+ImproperUIPanel panel;
+                   ^
+  symbol:   class 
+ImproperUIPanel
+  location: class 
+ConfigScreenUI
+C:\dev\StaffRadar\src\m
+ain\java\com\example\st
+affradar\gui\StaffOverl
+ayUI.java:5: error: 
+package improperui.api 
+does not exist
+import improperui.api.I
+mproperUIAPI;
+                     ^
+C:\dev\StaffRadar\src\m
+ain\java\com\example\st
+affradar\gui\StaffOverl
+ayUI.java:6: error: 
+package 
+improperui.api.panel 
+does not exist
+import improperui.api.p
+anel.ImproperUIPanel;
+                       
+    ^
+C:\dev\StaffRadar\src\m
+ain\java\com\example\st
+affradar\gui\StaffOverl
+ayUI.java:7: error: 
+package 
+improperui.api.element 
+does not exist
+import improperui.api.e
+lement.ImproperUIElemen
+t;
+                       
+      ^
+C:\dev\StaffRadar\src\m
+ain\java\com\example\st
+affradar\gui\StaffOverl
+ayUI.java:11: error: 
+cannot find symbol
+    private static 
+ImproperUIPanel panel;
+                   ^
+  symbol:   class 
+ImproperUIPanel
+  location: class 
+StaffOverlayUI
+C:\dev\StaffRadar\src\m
+ain\java\com\example\st
+affradar\gui\WatchAlert
+UI.java:4: error: 
+package improperui.api 
+does not exist
+import improperui.api.I
+mproperUIAPI;
+                     ^
+C:\dev\StaffRadar\src\m
+ain\java\com\example\st
+affradar\gui\WatchAlert
+UI.java:5: error: 
+package 
+improperui.api.panel 
+does not exist
+import improperui.api.p
+anel.ImproperUIPanel;
+                       
+    ^
+C:\dev\StaffRadar\src\m
+ain\java\com\example\st
+affradar\gui\WatchAlert
+UI.java:6: error: 
+package 
+improperui.api.element 
+does not exist
+import improperui.api.e
+lement.ImproperUIElemen
+t;
+                       
+      ^
+C:\dev\StaffRadar\src\m
+ain\java\com\example\st
+affradar\gui\WatchAlert
+UI.java:9: error: 
+cannot find symbol
+    private static 
+ImproperUIPanel panel;
+                   ^
+  symbol:   class 
+ImproperUIPanel
+  location: class 
+WatchAlertUI
+C:\dev\StaffRadar\src\m
+ain\java\com\example\st
+affradar\StaffRadarMod.
+java:13: error: 
+package improperui.api 
+does not exist
+import improperui.api.I
+mproperUIAPI;
+                     ^
+C:\dev\StaffRadar\src\m
+ain\java\com\example\st
+affradar\gui\callbacks\
+UICallbacks.java:7: 
+error: cannot find 
+symbol
+    @UICallback
+     ^
+  symbol:   class 
+UICallback
+  location: class 
+UICallbacks
+14 errors
+
+[Incubating] Problems report is available at: file:///C:/dev/StaffRadar/build/reports/problems/problems-report.html
+
+FAILURE: Build failed 
+with an exception.
+
+* What went wrong:
+Execution failed for 
+task ':compileJava'.
+> Compilation failed; 
+see the compiler 
+output below.
+  C:\dev\StaffRadar\src
+\main\java\com\example\
+staffradar\gui\callback
+s\UICallbacks.java:4: 
+error: package improper
+ui.api.callback does 
+not exist
+  import improperui.api
+.callback.UICallback;
+                       
+         ^
+  C:\dev\StaffRadar\src
+\main\java\com\example\
+staffradar\gui\ConfigSc
+reenUI.java:4: error: 
+package improperui.api 
+does not exist
+  import improperui.api
+.ImproperUIAPI;
+                       
+^
+  C:\dev\StaffRadar\src
+\main\java\com\example\
+staffradar\gui\ConfigSc
+reenUI.java:5: error: 
+package 
+improperui.api.panel 
+does not exist
+  import improperui.api
+.panel.ImproperUIPanel;
+                       
+      ^
+  C:\dev\StaffRadar\src
+\main\java\com\example\
+staffradar\gui\StaffOve
+rlayUI.java:5: error: 
+package improperui.api 
+does not exist
+  import improperui.api
+.ImproperUIAPI;
+                       
+^
+  C:\dev\StaffRadar\src
+\main\java\com\example\
+staffradar\gui\StaffOve
+rlayUI.java:6: error: 
+package 
+improperui.api.panel 
+does not exist
+  import improperui.api
+.panel.ImproperUIPanel;
+                       
+      ^
+  C:\dev\StaffRadar\src
+\main\java\com\example\
+staffradar\gui\StaffOve
+rlayUI.java:7: error: 
+package 
+improperui.api.element 
+does not exist
+  import improperui.api
+.element.ImproperUIElem
+ent;
+                       
+        ^
+  C:\dev\StaffRadar\src
+\main\java\com\example\
+staffradar\gui\WatchAle
+rtUI.java:4: error: 
+package improperui.api 
+does not exist
+  import improperui.api
+.ImproperUIAPI;
+                       
+^
+  C:\dev\StaffRadar\src
+\main\java\com\example\
+staffradar\gui\WatchAle
+rtUI.java:5: error: 
+package 
+improperui.api.panel 
+does not exist
+  import improperui.api
+.panel.ImproperUIPanel;
+                       
+      ^
+  C:\dev\StaffRadar\src
+\main\java\com\example\
+staffradar\gui\WatchAle
+rtUI.java:6: error: 
+package 
+improperui.api.element 
+does not exist
+  import improperui.api
+.element.ImproperUIElem
+ent;
+                       
+        ^
+  C:\dev\StaffRadar\src
+\main\java\com\example\
+staffradar\StaffRadarMo
+d.java:13: error: 
+package improperui.api 
+does not exist
+  import improperui.api
+.ImproperUIAPI;
+                       
+^C:\dev\StaffRadar\src\
+main\java\com\example\s
+taffradar\gui\ConfigScr
+eenUI.java:8: error: 
+cannot find symbol
+      private static 
+ImproperUIPanel panel;
+                     ^
+    symbol:   class 
+ImproperUIPanel
+    location: class 
+ConfigScreenUI
+  C:\dev\StaffRadar\src
+\main\java\com\example\
+staffradar\gui\StaffOve
+rlayUI.java:11: error: 
+cannot find symbol
+      private static 
+ImproperUIPanel panel;
+                     ^
+    symbol:   class 
+ImproperUIPanel
+    location: class 
+StaffOverlayUI
+  C:\dev\StaffRadar\src
+\main\java\com\example\
+staffradar\gui\WatchAle
+rtUI.java:9: error: 
+cannot find symbol
+      private static 
+ImproperUIPanel panel;
+                     ^
+    symbol:   class 
+ImproperUIPanel
+    location: class 
+WatchAlertUI
+  C:\dev\StaffRadar\src
+\main\java\com\example\
+staffradar\gui\callback
+s\UICallbacks.java:7: 
+error: cannot find 
+symbol
+      @UICallback
+       ^
+    symbol:   class 
+UICallback
+    location: class 
+UICallbacks
+  14 errors
+
+* Try:
+> Check your code and 
+dependencies to fix 
+the compilation 
+error(s)
+> Run with --scan to 
+get full insights.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.12/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 3s
+1 actionable task: 1 executed

@@ -1,0 +1,116 @@
+﻿
+> Configure project :
+Fabric Loom: 1.10.5
+
+> Task :compileJava FAILED
+.\gradlew : C:\dev\Staf
+fRadar\src\main\java\co
+m\example\staffradar\mi
+xins\ChunkDataMixin.jav
+a:25: error: velocity 
+has private access in 
+Entity
+At line:1 char:1
++ .\gradlew 
+compileJava --console 
+plain 2>&1 | Out-File 
+java_errors_5.t ...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (C:\dev\StaffR   
+ ad...ccess in Enti    
+ty:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+            if (client.
+player.velocity.lengthS
+quared() < 0.01) {
+                       
+      ^
+C:\dev\StaffRadar\src\m
+ain\java\com\example\st
+affradar\StaffRadarMod.
+java:30: error: 
+incompatible types: 
+Class<StaffRadarMod> 
+cannot be converted to 
+Class<? extends 
+ModInitializer>
+            ImproperUIA
+PI.init(MOD_ID, 
+StaffRadarMod.class, 
+                       
+                       
+      ^
+Note: Some messages 
+have been simplified; 
+recompile with 
+-Xdiags:verbose to get 
+full output
+2 errors
+
+[Incubating] Problems report is available at: file:///C:/dev/StaffRadar/build/reports/problems/problems-report.html
+
+FAILURE: Build failed 
+with an exception.
+
+* What went wrong:
+Execution failed for 
+task ':compileJava'.
+> Compilation failed; 
+see the compiler 
+output below.
+  C:\dev\StaffRadar\src
+\main\java\com\example\
+staffradar\mixins\Chunk
+DataMixin.java:25: 
+error: velocity has 
+private access in 
+Entity
+              if (clien
+t.player.velocity.lengt
+hSquared() < 0.01) {
+                       
+        ^Note: Some 
+messages have been 
+simplified; recompile 
+with -Xdiags:verbose 
+to get full outputC:\de
+v\StaffRadar\src\main\j
+ava\com\example\staffra
+dar\StaffRadarMod.java:
+30: error: 
+incompatible types: 
+Class<StaffRadarMod> 
+cannot be converted to 
+Class<? extends 
+ModInitializer>
+              ImproperU
+IAPI.init(MOD_ID, 
+StaffRadarMod.class, 
+                       
+                       
+        ^
+  2 errors
+
+* Try:
+> Check your code and 
+dependencies to fix 
+the compilation 
+error(s)
+> Run with --scan to 
+get full insights.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.12/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 4s
+1 actionable task: 1 executed

@@ -1,0 +1,50 @@
+{
+  "mappings": {
+    "com/example/staffradar/mixins/BlockUpdateMixin": {
+      "onBlockUpdate": "Lnet/minecraft/class_634;method_11136(Lnet/minecraft/class_2626;)V"
+    },
+    "com/example/staffradar/mixins/CameraAberrationMixin": {
+      "onPlayerPositionLook": "Lnet/minecraft/class_634;method_11157(Lnet/minecraft/class_2708;)V"
+    },
+    "com/example/staffradar/mixins/ChunkDataMixin": {
+      "onChunkData": "Lnet/minecraft/class_634;method_11128(Lnet/minecraft/class_2672;)V"
+    },
+    "com/example/staffradar/mixins/EntityTrackerMixin": {
+      "onEntityTrackerUpdate": "Lnet/minecraft/class_634;method_11093(Lnet/minecraft/class_2739;)V"
+    },
+    "com/example/staffradar/mixins/ParticleMixin": {
+      "onParticle": "Lnet/minecraft/class_634;method_11077(Lnet/minecraft/class_2675;)V"
+    },
+    "com/example/staffradar/mixins/SoundPacketMixin": {
+      "onPlaySound": "Lnet/minecraft/class_634;method_11146(Lnet/minecraft/class_2767;)V"
+    },
+    "com/example/staffradar/mixins/TabListMixin": {
+      "onPlayerList": "Lnet/minecraft/class_634;method_11113(Lnet/minecraft/class_2703;)V"
+    }
+  },
+  "data": {
+    "named:intermediary": {
+      "com/example/staffradar/mixins/BlockUpdateMixin": {
+        "onBlockUpdate": "Lnet/minecraft/class_634;method_11136(Lnet/minecraft/class_2626;)V"
+      },
+      "com/example/staffradar/mixins/CameraAberrationMixin": {
+        "onPlayerPositionLook": "Lnet/minecraft/class_634;method_11157(Lnet/minecraft/class_2708;)V"
+      },
+      "com/example/staffradar/mixins/ChunkDataMixin": {
+        "onChunkData": "Lnet/minecraft/class_634;method_11128(Lnet/minecraft/class_2672;)V"
+      },
+      "com/example/staffradar/mixins/EntityTrackerMixin": {
+        "onEntityTrackerUpdate": "Lnet/minecraft/class_634;method_11093(Lnet/minecraft/class_2739;)V"
+      },
+      "com/example/staffradar/mixins/ParticleMixin": {
+        "onParticle": "Lnet/minecraft/class_634;method_11077(Lnet/minecraft/class_2675;)V"
+      },
+      "com/example/staffradar/mixins/SoundPacketMixin": {
+        "onPlaySound": "Lnet/minecraft/class_634;method_11146(Lnet/minecraft/class_2767;)V"
+      },
+      "com/example/staffradar/mixins/TabListMixin": {
+        "onPlayerList": "Lnet/minecraft/class_634;method_11113(Lnet/minecraft/class_2703;)V"
+      }
+    }
+  }
+}

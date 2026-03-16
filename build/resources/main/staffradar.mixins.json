@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "com.example.staffradar.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "TabListMixin",
+    "SoundPacketMixin",
+    "ChunkDataMixin",
+    "EntityTrackerMixin",
+    "BlockUpdateMixin",
+    "ParticleMixin",
+    "CameraAberrationMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

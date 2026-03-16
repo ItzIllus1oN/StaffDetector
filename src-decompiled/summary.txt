@@ -1,0 +1,2 @@
+Summary for C:\dev\StaffRadar\.gradle\loom-cache\remapped_mods\net_fabricmc_yarn_1_21_8_1_21_8_build_1_v2\curse\maven\improperui-1418749\7407348\improperui-1418749-7407348.jar
+Decompiled with CFR 0.152
