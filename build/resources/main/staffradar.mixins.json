@@ -9,7 +9,8 @@
     "EntityTrackerMixin",
     "BlockUpdateMixin",
     "ParticleMixin",
-    "CameraAberrationMixin"
+    "CameraAberrationMixin",
+    "VanishTrackerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="21" />
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-AoutRefMapFile=C:\dev\StaffRadar\build\classes\java\main\staffradar-refmap.json -AdefaultObfuscationEnv=named:intermediary -Aquiet=true -AoutMapFileNamedIntermediary=C:\dev\StaffRadar\build\loom-cache\mixin-map-net.fabricmc.yarn.1_21_8.1.21.8+build.1-v2.main.tiny -AinMapFileNamedIntermediary=C:\Users\josef\.gradle\caches\fabric-loom\1.21.8\net.fabricmc.yarn.1_21_8.1.21.8+build.1-v2\mappings.tiny" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="staffradar.test" options="-AoutRefMapFile=C:\dev\StaffRadar\build\classes\java\test\test-staffradar-refmap.json -AdefaultObfuscationEnv=named:intermediary -Aquiet=true -AoutMapFileNamedIntermediary=C:\dev\StaffRadar\build\loom-cache\mixin-map-net.fabricmc.yarn.1_21_8.1.21.8+build.1-v2.test.tiny -AinMapFileNamedIntermediary=C:\Users\josef\.gradle\caches\fabric-loom\1.21.8\net.fabricmc.yarn.1_21_8.1.21.8+build.1-v2\mappings.tiny" />
+    </option>
+  </component>
+</project>

@@ -12,6 +12,7 @@ public class Config {
     public boolean particleEnabled = true;
     public boolean invisibleEntityEnabled = true;
     public boolean cameraAberrationEnabled = true;
+    public boolean vanishTrackerEnabled = true;
     public List<String> keywords = Arrays.asList(
             "Owner", "Co-Owner", "Admin", "Administrator", "Head-Admin", "Developer", "Dev", "Head-Developer",
             "Manager", "Maintainer", "Coordinator", "Moderator", "Mod", "SrMod", "Head-Mod", "Trial-Mod",

@@ -12,7 +12,5 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class TabListMixin {
     @Inject(method = "onPlayerList", at = @At("HEAD"))
     private void onPlayerListUpdate(PlayerListS2CPacket packet, CallbackInfo ci) {
-        // StaffRadarMod.getInstance().getStaffDetector().onPlayerListPacket(packet);
-        // Logic handled in StaffDetector tick for now, but packet-based update is more efficient
     }
 }

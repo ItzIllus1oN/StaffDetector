@@ -5,10 +5,10 @@
   "name": "StaffRadar",
   "description": "Detects hidden staff and spectators.",
   "authors": [
-    "Senior Mod Developer"
+    "demo"
   ],
   "contact": {
-    "homepage": "https://github.com/example/staffradar"
+    "homepage": ""
   },
   "license": "MIT",
   "icon": "assets/staffradar/icon.png",

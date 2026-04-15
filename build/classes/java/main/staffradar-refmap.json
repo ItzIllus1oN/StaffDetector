@@ -20,6 +20,10 @@
     },
     "com/example/staffradar/mixins/TabListMixin": {
       "onPlayerList": "Lnet/minecraft/class_634;method_11113(Lnet/minecraft/class_2703;)V"
+    },
+    "com/example/staffradar/mixins/VanishTrackerMixin": {
+      "onPlayerList": "Lnet/minecraft/class_634;method_11113(Lnet/minecraft/class_2703;)V",
+      "onPlayerRemove": "Lnet/minecraft/class_634;method_45725(Lnet/minecraft/class_7828;)V"
     }
   },
   "data": {
@@ -44,6 +48,10 @@
       },
       "com/example/staffradar/mixins/TabListMixin": {
         "onPlayerList": "Lnet/minecraft/class_634;method_11113(Lnet/minecraft/class_2703;)V"
+      },
+      "com/example/staffradar/mixins/VanishTrackerMixin": {
+        "onPlayerList": "Lnet/minecraft/class_634;method_11113(Lnet/minecraft/class_2703;)V",
+        "onPlayerRemove": "Lnet/minecraft/class_634;method_45725(Lnet/minecraft/class_7828;)V"
       }
     }
   }

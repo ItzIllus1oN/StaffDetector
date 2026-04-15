@@ -41,17 +41,13 @@ public class StaffOverlayUI {
         int width = maxWidth;
         int height = 15 + (cachedStaff.size() * 10);
 
-        // Draw background (Semi-transparent Black)
         context.fill(x, y, x + width, y + height, 0xCC000000);
-        // Accent line (Opaque Yellow)
         context.fill(x, y, x + width, y + 1, 0xFFFFFF55); 
         
-        // Draw title (Opaque Yellow)
         context.drawTextWithShadow(client.textRenderer, "§e§lStaff Detected (" + cachedStaff.size() + "):", x + 5, y + 5, 0xFFFFFF55);
         
         int offset = 15;
         for (StaffPlayer player : cachedStaff) {
-            // Player text (Opaque White)
             String entry = "§f" + player.name() + " §7(" + player.reason() + ")";
             context.drawTextWithShadow(client.textRenderer, entry, x + 5, y + offset, 0xFFFFFFFF);
             offset += 10;

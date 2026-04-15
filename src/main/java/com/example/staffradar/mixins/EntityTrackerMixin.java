@@ -5,47 +5,66 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.packet.s2c.play.EntityTrackerUpdateS2CPacket;
-import net.minecraft.entity.data.TrackedData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 @Mixin(ClientPlayNetworkHandler.class)
 public class EntityTrackerMixin {
 
+    private static final AtomicInteger selfUpdates = new AtomicInteger(0);
+    private static final AtomicInteger otherUpdates = new AtomicInteger(0);
+    private static long lastSpikeCheck = System.currentTimeMillis();
+    private static final long SPIKE_WINDOW_MS = 5000;
+    private static final double SPIKE_RATIO_THRESHOLD = 2.5;
+    private static final int MIN_OTHER_PACKETS = 5;
+
     @Inject(method = "onEntityTrackerUpdate", at = @At("HEAD"))
     private void onEntityTrackerUpdate(EntityTrackerUpdateS2CPacket packet, CallbackInfo ci) {
-        if (!com.example.staffradar.config.ConfigManager.getConfig().invisibleEntityEnabled) return;
-
         MinecraftClient client = MinecraftClient.getInstance();
-        if (client.player == null || client.world == null) return;
+        if (client.player == null || client.world == null)
+            return;
 
-        // Skip ourselves
-        if (packet.id() == client.player.getId()) return;
+        boolean isSelf = packet.id() == client.player.getId();
 
-        Entity entity = client.world.getEntityById(packet.id());
-        if (entity == null) return;
-
-        // We only care about entities that are visible players
-        // If the entity is a player AND is now being tracked as Invisible, that's suspicious
-        if (entity instanceof net.minecraft.client.network.AbstractClientPlayerEntity playerEntity) {
-            if (packet.trackedValues() == null) return;
-
-            packet.trackedValues().forEach(entry -> {
-                // DataTracker entry ID 6 = flags byte for LivingEntity
-                // Invisible flag = bit 5 (0x20)
-                if (entry.id() == 6) {
-                    Object value = entry.value();
-                    if (value instanceof Byte flags) {
-                        boolean invisible = (flags & 0x20) != 0;
-                        if (invisible) {
-                            StaffRadarMod.LOGGER.info("[StaffRadar][!] Entity {} ({}) has INVISIBLE flag set! Score +8", packet.id(), playerEntity.getGameProfile().getName());
-                            StaffRadarMod.getInstance().getSpectatorWatcher().addScore("invisible_entity", 8);
+        if (!isSelf && com.example.staffradar.config.ConfigManager.getConfig().invisibleEntityEnabled) {
+            Entity entity = client.world.getEntityById(packet.id());
+            if (entity instanceof net.minecraft.client.network.AbstractClientPlayerEntity playerEntity) {
+                if (packet.trackedValues() != null) {
+                    packet.trackedValues().forEach(entry -> {
+                        if (entry.id() == 6 && entry.value() instanceof Byte flags) {
+                            if ((flags & 0x20) != 0) {
+                                StaffRadarMod.LOGGER.warn("[StaffRadar][INVISIBLE] Player {} has Invisible flag set!",
+                                        playerEntity.getGameProfile().getName());
+                                StaffRadarMod.getInstance().getSpectatorWatcher().addScore("invisible_entity", 8);
+                            }
                         }
-                    }
+                    });
                 }
-            });
+            }
+        }
+
+        if (isSelf) {
+            selfUpdates.incrementAndGet();
+        } else {
+            otherUpdates.incrementAndGet();
+        }
+
+        long now = System.currentTimeMillis();
+        if (now - lastSpikeCheck >= SPIKE_WINDOW_MS) {
+            int self = selfUpdates.getAndSet(0);
+            int other = otherUpdates.getAndSet(0);
+            lastSpikeCheck = now;
+
+            if (other >= MIN_OTHER_PACKETS && self > other * SPIKE_RATIO_THRESHOLD) {
+                StaffRadarMod.LOGGER.warn(
+                        "[StaffRadar][SPIKE] Self entity got {} updates vs {} other updates in {}ms — possible spectator watching!",
+                        self, other, SPIKE_WINDOW_MS);
+                StaffRadarMod.getInstance().getSpectatorWatcher().addScore("entity_spike", 5);
+            }
         }
     }
 }

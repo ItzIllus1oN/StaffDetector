@@ -15,7 +15,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Mixin(ClientPlayNetworkHandler.class)
 public class BlockUpdateMixin {
-    // Cooldown map: block pos -> last scored time
     private static final Map<Long, Long> blockCooldowns = new ConcurrentHashMap<>();
     private static final long BLOCK_COOLDOWN_MS = 5000;
 
@@ -28,19 +27,19 @@ public class BlockUpdateMixin {
 
         BlockPos pos = packet.getPos();
         double distSq = client.player.getPos().squaredDistanceTo(pos.toCenterPos());
-        if (distSq > 64) return; // Within 8 blocks
+        if (distSq > 64) return;
 
-        // Throttle: don't score the same block position repeatedly
+        if (distSq < 9) return;
         long key = pos.asLong();
         long now = System.currentTimeMillis();
         if (blockCooldowns.getOrDefault(key, 0L) + BLOCK_COOLDOWN_MS > now) return;
 
-        boolean playerNearby = client.world.getPlayers().stream()
+        boolean otherPlayerNearby = client.world.getPlayers().stream()
             .anyMatch(p -> !p.equals(client.player) && p.getPos().squaredDistanceTo(pos.toCenterPos()) < 9);
 
-        if (!playerNearby) {
+        if (!otherPlayerNearby) {
             blockCooldowns.put(key, now);
-            StaffRadarMod.LOGGER.info("[StaffRadar] Block update with no visible player nearby at {}. Score +2", pos);
+            StaffRadarMod.LOGGER.info("[StaffRadar] Block update at {} with no visible player nearby. Score +2", pos);
             StaffRadarMod.getInstance().getSpectatorWatcher().addScore("block", 2);
         }
     }
