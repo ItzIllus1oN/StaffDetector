@@ -1,37 +1,54 @@
 package com.example.staffradar.keybinds;
 
-import com.example.staffradar.gui.StaffOverlayUI;
+import com.example.staffradar.StaffRadarMod;
 import com.example.staffradar.gui.ConfigScreenUI;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import com.example.staffradar.gui.StaffOverlayUI;
+import com.mojang.blaze3d.platform.InputConstants;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
-import org.lwjgl.glfw.GLFW;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.resources.Identifier;
 
 public class KeybindHandler {
-    private static KeyBinding toggleOverlayKey;
-    private static KeyBinding openConfigKey;
+
+    private static KeyMapping toggleOverlayKey;
+    private static KeyMapping openConfigKey;
+
+    private static final KeyMapping.Category CATEGORY =
+            KeyMapping.Category.register(
+                    Identifier.fromNamespaceAndPath(
+                            StaffRadarMod.MOD_ID,
+                            "main"
+                    )
+            );
 
     public static void register() {
-        toggleOverlayKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-            "key.staffradar.toggle_overlay",
-            InputUtil.Type.KEYSYM,
-            GLFW.GLFW_KEY_V,
-            "category.staffradar.main"
-        ));
 
-        openConfigKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-            "key.staffradar.open_config",
-            InputUtil.Type.KEYSYM,
-            GLFW.GLFW_KEY_P,
-            "category.staffradar.main"
-        ));
+        toggleOverlayKey = KeyMappingHelper.registerKeyMapping(
+                new KeyMapping(
+                        "key.staffradar.toggle_overlay",
+                        InputConstants.Type.KEYSYM,
+                        InputConstants.KEY_V,
+                        CATEGORY
+                )
+        );
+
+        openConfigKey = KeyMappingHelper.registerKeyMapping(
+                new KeyMapping(
+                        "key.staffradar.open_config",
+                        InputConstants.Type.KEYSYM,
+                        InputConstants.KEY_P,
+                        CATEGORY
+                )
+        );
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            while (toggleOverlayKey.wasPressed()) {
+
+            while (toggleOverlayKey.consumeClick()) {
                 StaffOverlayUI.toggle();
             }
-            while (openConfigKey.wasPressed()) {
+
+            while (openConfigKey.consumeClick()) {
                 ConfigScreenUI.open();
             }
         });
