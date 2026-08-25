@@ -2,112 +2,235 @@ package com.example.staffradar.gui;
 
 import com.example.staffradar.config.Config;
 import com.example.staffradar.config.ConfigManager;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.CheckboxWidget;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.text.Text;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.Checkbox;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 
 public class ConfigScreenUI extends Screen {
-    private TextFieldWidget keywordsField;
-    private CheckboxWidget keywordToggle;
-    private CheckboxWidget soundToggle;
-    private CheckboxWidget chunkToggle;
-    private CheckboxWidget alertToggle;
-    private CheckboxWidget blockToggle;
-    private CheckboxWidget particleToggle;
-    private CheckboxWidget invisibleEntityToggle;
-    private CheckboxWidget cameraToggle;
-    private CheckboxWidget vanishTrackerToggle;
+
+    private EditBox keywordsField;
+
+    private Checkbox keywordToggle;
+    private Checkbox soundToggle;
+    private Checkbox chunkToggle;
+    private Checkbox alertToggle;
+    private Checkbox blockToggle;
+    private Checkbox particleToggle;
+    private Checkbox invisibleEntityToggle;
+    private Checkbox cameraToggle;
+    private Checkbox vanishTrackerToggle;
 
     public ConfigScreenUI() {
-        super(Text.of("StaffRadar Configuration"));
+        super(Component.literal("StaffRadar Configuration"));
     }
 
     @Override
     protected void init() {
+
         Config config = ConfigManager.getConfig();
+
         int leftX = this.width / 2 - 210;
         int rightX = this.width / 2 + 10;
+
         int startY = 35;
         int step = 22;
 
-        this.keywordToggle = CheckboxWidget.builder(Text.of("Keyword Detection"), this.textRenderer)
-                .pos(leftX, startY).checked(config.keywordEnabled).build();
-        this.addDrawableChild(this.keywordToggle);
+        this.keywordToggle = Checkbox.builder(
+                        Component.literal("Keyword Detection"),
+                        this.font
+                )
+                .pos(leftX, startY)
+                .selected(config.keywordEnabled)
+                .build();
 
-        this.soundToggle = CheckboxWidget.builder(Text.of("Sound Detection"), this.textRenderer)
-                .pos(leftX, startY + step).checked(config.soundEnabled).build();
-        this.addDrawableChild(this.soundToggle);
+        this.addRenderableWidget(this.keywordToggle);
 
-        this.chunkToggle = CheckboxWidget.builder(Text.of("Chunk Resend Detection"), this.textRenderer)
-                .pos(leftX, startY + step * 2).checked(config.chunkEnabled).build();
-        this.addDrawableChild(this.chunkToggle);
+        this.soundToggle = Checkbox.builder(
+                        Component.literal("Sound Detection"),
+                        this.font
+                )
+                .pos(leftX, startY + step)
+                .selected(config.soundEnabled)
+                .build();
 
-        this.blockToggle = CheckboxWidget.builder(Text.of("Block Interaction Detection"), this.textRenderer)
-                .pos(leftX, startY + step * 3).checked(config.blockEnabled).build();
-        this.addDrawableChild(this.blockToggle);
+        this.addRenderableWidget(this.soundToggle);
 
-        this.particleToggle = CheckboxWidget.builder(Text.of("Particle Detection"), this.textRenderer)
-                .pos(rightX, startY).checked(config.particleEnabled).build();
-        this.addDrawableChild(this.particleToggle);
+        this.chunkToggle = Checkbox.builder(
+                        Component.literal("Chunk Resend Detection"),
+                        this.font
+                )
+                .pos(leftX, startY + step * 2)
+                .selected(config.chunkEnabled)
+                .build();
 
-        this.invisibleEntityToggle = CheckboxWidget.builder(Text.of("Invisible Entity Detection"), this.textRenderer)
-                .pos(rightX, startY + step).checked(config.invisibleEntityEnabled).build();
-        this.addDrawableChild(this.invisibleEntityToggle);
+        this.addRenderableWidget(this.chunkToggle);
 
-        this.cameraToggle = CheckboxWidget.builder(Text.of("Camera Aberration Detection"), this.textRenderer)
-                .pos(rightX, startY + step * 2).checked(config.cameraAberrationEnabled).build();
-        this.addDrawableChild(this.cameraToggle);
+        this.blockToggle = Checkbox.builder(
+                        Component.literal("Block Interaction Detection"),
+                        this.font
+                )
+                .pos(leftX, startY + step * 3)
+                .selected(config.blockEnabled)
+                .build();
 
-        this.vanishTrackerToggle = CheckboxWidget.builder(Text.of("Vanish Tracker (Tab List)"), this.textRenderer)
-                .pos(rightX, startY + step * 3).checked(config.vanishTrackerEnabled).build();
-        this.addDrawableChild(this.vanishTrackerToggle);
+        this.addRenderableWidget(this.blockToggle);
 
-        this.alertToggle = CheckboxWidget.builder(Text.of("Staff Watch Alert"), this.textRenderer)
-                .pos(leftX, startY + step * 4).checked(config.spectatorAlertEnabled).build();
-        this.addDrawableChild(this.alertToggle);
+        this.particleToggle = Checkbox.builder(
+                        Component.literal("Particle Detection"),
+                        this.font
+                )
+                .pos(rightX, startY)
+                .selected(config.particleEnabled)
+                .build();
+
+        this.addRenderableWidget(this.particleToggle);
+
+        this.invisibleEntityToggle = Checkbox.builder(
+                        Component.literal("Invisible Entity Detection"),
+                        this.font
+                )
+                .pos(rightX, startY + step)
+                .selected(config.invisibleEntityEnabled)
+                .build();
+
+        this.addRenderableWidget(this.invisibleEntityToggle);
+
+        this.cameraToggle = Checkbox.builder(
+                        Component.literal("Camera Aberration Detection"),
+                        this.font
+                )
+                .pos(rightX, startY + step * 2)
+                .selected(config.cameraAberrationEnabled)
+                .build();
+
+        this.addRenderableWidget(this.cameraToggle);
+
+        this.vanishTrackerToggle = Checkbox.builder(
+                        Component.literal("Vanish Tracker (Tab List)"),
+                        this.font
+                )
+                .pos(rightX, startY + step * 3)
+                .selected(config.vanishTrackerEnabled)
+                .build();
+
+        this.addRenderableWidget(this.vanishTrackerToggle);
+
+        this.alertToggle = Checkbox.builder(
+                        Component.literal("Staff Watch Alert"),
+                        this.font
+                )
+                .pos(leftX, startY + step * 4)
+                .selected(config.spectatorAlertEnabled)
+                .build();
+
+        this.addRenderableWidget(this.alertToggle);
 
         int fieldY = startY + step * 4 + 10;
-        this.keywordsField = new TextFieldWidget(this.textRenderer, this.width / 2 - 150, fieldY, 300, 20,
-                Text.of("Keywords"));
-        this.keywordsField.setMaxLength(2000);
-        this.keywordsField.setText(config.getKeywordsString());
-        this.addDrawableChild(this.keywordsField);
 
-        this.addDrawableChild(ButtonWidget.builder(Text.of("Save & Close"), button -> saveAndClose())
-                .dimensions(this.width / 2 - 60, fieldY + 30, 120, 20).build());
+        this.keywordsField = new EditBox(
+                this.font,
+                this.width / 2 - 150,
+                fieldY,
+                300,
+                20,
+                Component.literal("Keywords")
+        );
+
+        this.keywordsField.setMaxLength(2000);
+        this.keywordsField.setValue(config.getKeywordsString());
+
+        this.addRenderableWidget(this.keywordsField);
+
+        this.addRenderableWidget(
+                Button.builder(
+                                Component.literal("Save & Close"),
+                                button -> saveAndClose()
+                        )
+                        .bounds(
+                                this.width / 2 - 60,
+                                fieldY + 30,
+                                120,
+                                20
+                        )
+                        .build()
+        );
     }
 
     private void saveAndClose() {
+
         Config config = ConfigManager.getConfig();
-        config.keywordEnabled = this.keywordToggle.isChecked();
-        config.soundEnabled = this.soundToggle.isChecked();
-        config.chunkEnabled = this.chunkToggle.isChecked();
-        config.blockEnabled = this.blockToggle.isChecked();
-        config.particleEnabled = this.particleToggle.isChecked();
-        config.invisibleEntityEnabled = this.invisibleEntityToggle.isChecked();
-        config.cameraAberrationEnabled = this.cameraToggle.isChecked();
-        config.vanishTrackerEnabled = this.vanishTrackerToggle.isChecked();
-        config.spectatorAlertEnabled = this.alertToggle.isChecked();
-        config.setKeywordsFromString(this.keywordsField.getText());
+
+        config.keywordEnabled = this.keywordToggle.selected();
+        config.soundEnabled = this.soundToggle.selected();
+        config.chunkEnabled = this.chunkToggle.selected();
+        config.blockEnabled = this.blockToggle.selected();
+        config.particleEnabled = this.particleToggle.selected();
+        config.invisibleEntityEnabled = this.invisibleEntityToggle.selected();
+        config.cameraAberrationEnabled = this.cameraToggle.selected();
+        config.vanishTrackerEnabled = this.vanishTrackerToggle.selected();
+        config.spectatorAlertEnabled = this.alertToggle.selected();
+
+        config.setKeywordsFromString(
+                this.keywordsField.getValue()
+        );
+
         ConfigManager.save();
-        this.close();
+
+        this.onClose();
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        context.fill(0, 0, this.width, this.height, 0xAA000000);
-        context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, 15, 0xFFFFFF);
-        int fieldLabelY = 35 + 22 * 4 + 10 - 12;
-        context.drawTextWithShadow(this.textRenderer, "Staff Keywords (comma separated):", this.width / 2 - 150,
-                fieldLabelY, 0xAAAAAA);
-        super.render(context, mouseX, mouseY, delta);
+    public void render(
+            GuiGraphicsExtractor context,
+            int mouseX,
+            int mouseY,
+            float delta
+    ) {
+
+        context.fill(
+                0,
+                0,
+                this.width,
+                this.height,
+                0xAA000000
+        );
+
+        context.centeredText(
+                this.font,
+                this.title,
+                this.width / 2,
+                15,
+                0xFFFFFFFF
+        );
+
+        int fieldLabelY =
+                35 + 22 * 4 + 10 - 12;
+
+        context.text(
+                this.font,
+                "Staff Keywords (comma separated):",
+                this.width / 2 - 150,
+                fieldLabelY,
+                0xFFAAAAAA,
+                false
+        );
+
+        super.render(
+                context,
+                mouseX,
+                mouseY,
+                delta
+        );
     }
 
     public static void open() {
-        MinecraftClient.getInstance().execute(() -> MinecraftClient.getInstance().setScreen(new ConfigScreenUI()));
+
+        Minecraft.getInstance().gui.setScreen(
+                new ConfigScreenUI()
+        );
     }
 }
