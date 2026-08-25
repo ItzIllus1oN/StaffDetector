@@ -1,15 +1,63 @@
-org.gradle.jvmargs=-Xmx2G
-org.gradle.parallel=true
-org.gradle.configuration-cache=false
+plugins {
+    id 'fabric-loom' version "${loom_version}"
+    id 'maven-publish'
+}
 
-minecraft_version=26.2
-loader_version=0.19.3
-loom_version=1.17-SNAPSHOT
+version = project.mod_version
+group = project.mod_group
 
-java_version=25
+base {
+    archivesName = project.mod_id
+}
 
-mod_version=1.0.0
-mod_group=com.example
-mod_id=staffradar
+repositories {
+    mavenCentral()
 
-fabric_api_version=0.156.0+26.2
+    maven {
+        url = "https://maven.fabricmc.net/"
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+
+    modImplementation "net.fabricmc:fabric-loader:${loader_version}"
+
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("fabric.mod.json") {
+        expand(
+            version: project.version,
+            minecraft_version: project.minecraft_version,
+            loader_version: project.loader_version
+        )
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 25
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
+    withSourcesJar()
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.mod_id}" }
+    }
+}
+
+publishing {
+    publications {
+        create("mavenJava", MavenPublication) {
+            from components.java
+        }
+    }
+}
