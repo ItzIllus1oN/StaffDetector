@@ -1,71 +1,15 @@
-plugins {
-    id 'fabric-loom' version "${loom_version}"
-    id 'maven-publish'
-}
+org.gradle.jvmargs=-Xmx2G
+org.gradle.parallel=true
+org.gradle.configuration-cache=false
 
-version = project.mod_version
-group = project.mod_group
+minecraft_version=26.2
+loader_version=0.19.3
+loom_version=1.17-SNAPSHOT
 
-base {
-    archivesName = project.mod_id
-}
+java_version=25
 
-repositories {
-    mavenCentral()
+mod_version=1.0.0
+mod_group=com.example
+mod_id=staffradar
 
-    maven {
-        url = "https://maven.fabricmc.net/"
-    }
-}
-
-dependencies {
-    // Minecraft 26.2 is unobfuscated.
-    // DO NOT add Yarn mappings.
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-
-    // Fabric Loader
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-    // Fabric API
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-}
-
-processResources {
-    inputs.property "version", project.version
-
-    filesMatching("fabric.mod.json") {
-        expand(
-            "version": project.version,
-            "minecraft_version": project.minecraft_version,
-            "loader_version": project.loader_version
-        )
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    options.release = 25
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_25
-    targetCompatibility = JavaVersion.VERSION_25
-    withSourcesJar()
-}
-
-jar {
-    from("LICENSE") {
-        rename { "${it}_${project.mod_id}" }
-    }
-}
-
-publishing {
-    publications {
-        create("mavenJava", MavenPublication) {
-            from components.java
-        }
-    }
-
-    repositories {
-        // Add publishing repositories here if needed.
-    }
-}
+fabric_api_version=0.156.0+26.2
